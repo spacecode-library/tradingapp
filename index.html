@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Live Price Feed</h2>
+  <pre id="prices"></pre>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8001/ws/prices");
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data.replace(/'/g, '"'));
+      document.getElementById("prices").innerText = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
